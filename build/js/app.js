@@ -10,7 +10,7 @@ function Repo() {
 }
 
 Repo.prototype.getRepos = function (username, displayFunction) {
-  $.get('https://api.github.com/users/'+username+'?access_token='+apiKey).then(function (response) {
+  $.get('https://api.github.com/users/'+username+'?access_token=' + apiKey).then(function (response) {
     console.log(response);
     displayFunction(name, response.login, response.html_url, response.repo_url);
     console.log(response.login + " " + response.html_url);
@@ -30,7 +30,7 @@ var displayData = function(name, userData, reposData, moreData) {
 
   $('#showRepos').append("<h2> <a href=" + reposData + ">Click to view " + name + " repositories.</a>" + "</h2>");
 
-  console.log(userData, " ", reposData + " YES");
+  console.log(userData, " ", reposData + " on github ");
 };
 
 
@@ -38,14 +38,11 @@ var displayData = function(name, userData, reposData, moreData) {
 $(document).ready(function () {
   //creating a new object
   var repos = new Repo();
-  // repos.getRepos();
-
 
   $('#button').click(function () {
-console.log("mwiti");
+
     var username = $('#userInput').val();
     $('#userInput').val("");
-console.log(username);
     repos.getRepos(username, displayData);
 
     $('#displayUser').empty();
